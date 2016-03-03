@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include <math.h>
 #define  GLEW_STATIC
 #include <GL/glew.h>
 #include <SDL2/SDL.h>
@@ -108,6 +109,24 @@ int main(int argc, char *argv[]) {
   );_glec
   
   
+  for (uint32_t i = 0; i < vertCount; i += 3) {
+    // top corner
+    triData[i  ].r = 0xFF;
+    triData[i  ].g = 0x00;
+    triData[i  ].b = 0x00;
+    triData[i  ].o = 0xFF;
+    // bottom left corner
+    triData[i+1].r = 0x00;
+    triData[i+1].g = 0xFF;
+    triData[i+1].b = 0x00;
+    triData[i+1].o = 0xFF;
+    // bottom right corner
+    triData[i+2].r = 0x00;
+    triData[i+2].g = 0x00;
+    triData[i+2].b = 0xFF;
+    triData[i+2].o = 0xFF;
+  }
+  
   
   
   int curFrame = 0;
@@ -121,30 +140,39 @@ int main(int argc, char *argv[]) {
       }
     }
     
-    for (uint32_t i = 0; i < vertCount; i += 3) {
-      triData[i].x =  0.0;
-      triData[i].y =  0.5;
-      triData[i].z =  0.0;
-      triData[i].r = 0xFF;
-      triData[i].g = 0x00;
-      triData[i].b = 0x00;
-      triData[i].o = 0xFF;
-      
-      triData[i+1].x =  0.3;
-      triData[i+1].y = -0.2;
-      triData[i+1].z =  0.0;
-      triData[i+1].r = 0x00;
-      triData[i+1].g = 0xFF;
-      triData[i+1].b = 0x00;
-      triData[i+1].o = 0xFF;
-      
-      triData[i+2].x = -0.3;
-      triData[i+2].y = -0.2;
-      triData[i+2].z =  0.0;
-      triData[i+2].r = 0x00;
-      triData[i+2].g = 0x00;
-      triData[i+2].b = 0xFF;
-      triData[i+2].o = 0xFF;
+    uint32_t i = 0;
+    for (uint32_t row = 0; row < triArrayH; row++) {
+      for (uint32_t col = 0; col < triArrayW; col++, i+=3) {
+        float offsetX = col*0.05 + fabs(-0.5 + (curFrame%120)/120.0);
+        float offsetY = row*0.05;
+        
+        // top corner
+        triData[i].x = -1.00 + offsetX;
+        triData[i].y = -0.83 + offsetY;
+        triData[i].z =  0.0;
+        //triData[i].r = 0xFF;
+        //triData[i].g = 0x00;
+        //triData[i].b = 0x00;
+        //triData[i].o = 0xFF;
+        
+        // bottom left corner
+        triData[i+1].x = -1.02 + offsetX;
+        triData[i+1].y = -0.80 + offsetY;
+        triData[i+1].z =  0.0;
+        //triData[i+1].r = 0x00;
+        //triData[i+1].g = 0xFF;
+        //triData[i+1].b = 0x00;
+        //triData[i+1].o = 0xFF;
+        
+        // bottom right corner
+        triData[i+2].x = -0.98 + offsetX;
+        triData[i+2].y = -0.80 + offsetY;
+        triData[i+2].z =  0.0;
+        //triData[i+2].r = 0x00;
+        //triData[i+2].g = 0x00;
+        //triData[i+2].b = 0xFF;
+        //triData[i+2].o = 0xFF;
+      }
     }
     
     glDrawArrays(GL_TRIANGLES, 0, vertCount);_glec

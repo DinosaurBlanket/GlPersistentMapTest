@@ -2,7 +2,7 @@
 
 #define CHECK_SDL_ERRORS 1
 #define CHECK_GL_ERRORS  1
-#define ENABLE_VSYNC     1
+#define ENABLE_VSYNC     0
 
 #if CHECK_SDL_ERRORS
   void sdlec(int line, const char *file);
