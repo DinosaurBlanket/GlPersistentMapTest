@@ -143,7 +143,7 @@ int main(int argc, char *argv[]) {
     uint32_t i = 0;
     for (uint32_t row = 0; row < triArrayH; row++) {
       for (uint32_t col = 0; col < triArrayW; col++, i+=3) {
-        float offsetX = col*0.05 + fabs(-0.5 + (curFrame%120)/120.0);
+        float offsetX = col*0.05 + fabs(-0.5 + (curFrame%1200)/1200.0);
         float offsetY = row*0.05;
         
         // top corner
@@ -174,9 +174,8 @@ int main(int argc, char *argv[]) {
         //triData[i+2].o = 0xFF;
       }
     }
-    
     glDrawArrays(GL_TRIANGLES, 0, vertCount);_glec
-    
+    glFinish();_glec
     SDL_GL_SwapWindow(window);_sdlec
     glClear(GL_COLOR_BUFFER_BIT);_glec
     curFrame++;
