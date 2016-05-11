@@ -29,8 +29,8 @@ int main(int argc, char *argv[]) {
   SDL_GLContext GlContext = NULL;
   SDL_Init(SDL_INIT_VIDEO);_sdlec
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-  SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
-  SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
+  SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+  SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
   window = SDL_CreateWindow(
     "GlPersistentMapTest",     //const char* title,
     SDL_WINDOWPOS_UNDEFINED,   //int         x,
@@ -69,9 +69,9 @@ int main(int argc, char *argv[]) {
   uint32_t vboSize   = vertCount * sizeof(vert);
   glGenBuffers(1, &vbo);_glec
   glBindBuffer(GL_ARRAY_BUFFER, vbo);_glec
-  GLbitfield bufferStorageFlags = 
-    GL_MAP_WRITE_BIT      | 
-    GL_MAP_PERSISTENT_BIT | 
+  GLbitfield bufferStorageFlags =
+    GL_MAP_WRITE_BIT      |
+    GL_MAP_PERSISTENT_BIT |
     GL_MAP_COHERENT_BIT
   ;
   glBufferStorage(
@@ -90,8 +90,8 @@ int main(int argc, char *argv[]) {
   
   
   GLuint shaderProgram = createShaderProgram(
-    "src/vert.glsl", 
-    "src/frag.glsl", 
+    "src/vert.glsl",
+    "src/frag.glsl",
     "shaderProgram"
   );
   if (!shaderProgram) return __LINE__;
